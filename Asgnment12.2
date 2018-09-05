@@ -1,0 +1,34 @@
+A. What are the assumptions of ANOVA, test it out?
+Ans: Assumptions
+       Each group sample is drawn from a normally distributed population
+       All populations have a common variance
+       All samples are drawn independently of each other
+       Within each sample, the observations are sampled randomly and independently of each other
+        Factor effects are additive
+library(mvoutlier)
+outliers <- 
+aq.plot(mtcars[c("mpg","disp","hp","drat","wt","qsec")])
+mshapiro.test(M)
+x <- as.matrix(mydata) 
+center <- colMeans(x) 
+n <- nrow(x); p <- ncol(x); cov <- cov(x); 
+d <- mahalanobis(x,center,cov) 
+qqplot(qchisq(ppoints(n),df=p),d,
+  main="QQ Plot Assessing Multivariate Normality",
+  ylab="Mahalanobis D2")
+abline(a=0,b=1)
+
+
+b. Why ANOVA test? Is there any other way to answer the above question?
+Ans: ANOVA designs in traditional statistical packages, you are likely to find R's approach less coherent and user-friendly.
+fit1<- lm(response ~ stimulus + condition + stimulus:condition, data=scrd) 
+fit2<- lm(response ~ stimulus + condition, data=scrd) 
+fit3<- lm(response ~ condition, data=scrd) 
+op = par(mfrow=c(2,3)) 
+hist(residuals(fit1)) 
+hist(residuals(fit2)) 
+hist(residuals(fit3))
+qqnorm(residuals(fit1)) 
+qqnorm(residuals(fit2)) 
+qqnorm(residuals(fit3)) 
+
